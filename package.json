@@ -1,0 +1,46 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": {
+    "nohoist": [
+      "**/@vue/**",
+      "**/core-js/**"
+    ],
+    "packages": [
+      "packages/@egism/*"
+    ]
+  },
+  "scripts": {
+    "commit": "git-cz",
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean",
+    "version": "lerna version --conventional-commits",
+    "core:build": "lerna run --stream --scope @egism/core build"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "packages/@egism/*/src/*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "commitizen": "^4.2.4",
+    "cz-lerna-changelog": "^2.0.3",
+    "husky": "^7.0.2",
+    "lerna": "^4.0.0",
+    "lint-staged": "^11.1.2"
+  }
+}
