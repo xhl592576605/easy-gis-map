@@ -4,6 +4,8 @@ import replace from '@rollup/plugin-replace'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
+import postcss from 'rollup-plugin-postcss'
+
 
 const pkg = require('./package.json')
 const name = pkg.name
@@ -106,10 +108,16 @@ function createConfig (format, output, plugins = []) {
   hasTSChecked = true
 
   const external = [
-   'lodash'
+    'lodash'
   ]
 
-  const nodePlugins = [resolve(), commonjs()]
+  const nodePlugins = [
+    resolve(),
+    commonjs(),
+    postcss({
+      extensions: ['.css']
+    })
+  ]
 
   return {
     input: `src/index.ts`,

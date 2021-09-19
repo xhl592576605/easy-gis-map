@@ -2,17 +2,17 @@
   "fileheader.customMade": { //此为头部注释
     "description": "",
     "version": "1.0",
-    "autor": "brisky",
+    "autor": "egism",
     "email": "592576605@qq.com",
     "Date": "Do not edit",
-    "lastEditors": "brisky",
+    "lastEditors": "egism",
     "LastEditTime": "Do not edit",
   },
   "fileheader.cursorMode": { //此为函数注释
     "description": "",
     "param": "",
     "return": "",
-    "author": "brisky"
+    "author": "egism"
   },
   "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true, //这个控制是否启用字体连字，true 启用，false 不启用，这里选择启用 
