@@ -1,4 +1,5 @@
 import loader from '@monaco-editor/loader'
+import vueLanguage from '../monaco/language/vue'
 let monaco: any
 let editor: any
 export default () => {
@@ -12,7 +13,11 @@ export default () => {
       fontSize: 18,
       fontFamily: 'MonoLisa, monospace',
     })
+    registerVueLanguages(vueLanguage)
     return editor
+  }
+  const registerVueLanguages = (language: any) => {
+    monaco.languages.register(language)
   }
   const config = () => {
     loader.config({

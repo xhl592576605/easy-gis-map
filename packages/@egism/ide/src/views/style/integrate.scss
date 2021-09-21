@@ -15,8 +15,9 @@
     height: calc(100% - 136px);
     display: flex;
     flex-direction: row;
+    margin: 0 10px;
 
-    .file-tree {
+    .file-tree-container {
       width: 15%;
       height: 100%;
     }

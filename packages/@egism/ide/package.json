@@ -2,21 +2,29 @@
   "name": "@egism/ide",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "dev": "vite & npm run folder:watch",
+    "build": "npm run folder:build && vite build",
+    "serve": "vite preview",
+    "folder:build": "node script/folder.js",
+    "folder:watch": "node script/watch.js"
   },
   "dependencies": {
     "@monaco-editor/loader": "^1.1.1",
     "@vitejs/plugin-vue-jsx": "^1.1.7",
+    "@vueuse/core": "^6.4.1",
+    "@vueuse/integrations": "^6.4.1",
+    "ant-design-vue": "^2.2.8",
     "sass": "^1.39.0",
     "vue": "^3.2.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.6.0",
     "@vue/compiler-sfc": "^3.2.6",
+    "shelljs": "^0.8.4",
     "typescript": "^4.3.2",
     "vite": "^2.5.2",
-    "vue-tsc": "^0.2.2"
+    "vite-plugin-components": "^0.13.3",
+    "vue-tsc": "^0.2.2",
+    "watch": "^1.0.2"
   }
 }

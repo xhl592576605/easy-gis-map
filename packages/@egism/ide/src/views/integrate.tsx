@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import './style/integrate.scss'
 import fileTree from './fileTree'
 import editor from './editor'
@@ -6,24 +6,28 @@ import preview from './preview'
 export default defineComponent({
   name: 'integrate',
   components: { fileTree, editor, preview },
-  setup() {
+  setup: (props) => {
 
-    const file = {
-      name: '111.html',
-      code: '<div>111/div>',
-      language: 'html'
+    let fileInfo = reactive({
+      name: 'code.js',
+      code: '// code \n',
+      language: 'javascript'
+    })
+    const onSlectFile = (_fileInfo: any) => {
+      fileInfo = Object.assign(fileInfo, _fileInfo)
     }
+
     return () => (
       <div class="integrate">
         <div class="head">
           <h3>egism</h3>
         </div>
         <div class="body">
-          <div class="file-tree">
-            <fileTree></fileTree>
+          <div class="file-tree-container">
+            <fileTree onSelectFile={onSlectFile}></fileTree>
           </div>
           <div class="editor-container">
-            <editor name={file.name} code={file.code} language={file.language}></editor>
+            <editor name={fileInfo.name} code={fileInfo.code} language={fileInfo.language}></editor>
           </div>
           <div class="preview-container">
             <preview></preview>
