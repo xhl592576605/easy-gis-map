@@ -1,5 +1,5 @@
 import loader from '@monaco-editor/loader'
-import vueLanguage from '../monaco/language/vue'
+import registerVueLanguage from '../monaco/language/vue'
 let monaco: any
 let editor: any
 export default () => {
@@ -10,14 +10,14 @@ export default () => {
       value: code,
       wordWrap: 'on', // 代码超出换行
       theme: 'vs-dark', // 主题
-      fontSize: 18,
+      fontSize: 16,
       fontFamily: 'MonoLisa, monospace',
     })
-    registerVueLanguages(vueLanguage)
+    registerLanguages()
     return editor
   }
-  const registerVueLanguages = (language: any) => {
-    monaco.languages.register(language)
+  const registerLanguages = () => {
+    registerVueLanguage(monaco)
   }
   const config = () => {
     loader.config({
