@@ -1,0 +1,38 @@
+.msg {
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  z-index: 10;
+  padding: 14px 20px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-family: var(--font-code);
+  white-space: pre-wrap;
+  max-height: calc(100% - 50px);
+  overflow-y: scroll;
+}
+
+.msg.err {
+  color: red;
+  border-color: red;
+  background-color: #ffd7d7;
+}
+
+.msg.warn {
+  --color: rgb(105, 95, 27);
+  color: var(--color);
+  border-color: var(--color);
+  background-color: rgb(247, 240, 205);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.15s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translate(0, 10px);
+}

@@ -15,7 +15,8 @@
     "@vueuse/integrations": "^6.4.1",
     "ant-design-vue": "^2.2.8",
     "sass": "^1.39.0",
-    "vue": "^3.2.6"
+    "vue": "^3.2.6",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.6.0",

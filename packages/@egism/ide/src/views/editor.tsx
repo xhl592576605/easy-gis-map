@@ -29,7 +29,7 @@ export default defineComponent({
     })
     const runCode = () => {
       const { run } = useRunCode()
-      run(newCode.value)
+      run(newCode.value, language.value)
     }
     const restore = () => {
       code.value = oldCode.value
