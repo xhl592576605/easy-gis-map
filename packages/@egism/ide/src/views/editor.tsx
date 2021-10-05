@@ -29,13 +29,12 @@ export default defineComponent({
     })
     const runCode = () => {
       const { run } = useRunCode()
-      run(newCode.value, language.value)
+      run(code.value, language.value)
     }
     const restore = () => {
       code.value = oldCode.value
-    }
-    const onCodeChange = (_code: string) => {
-      newCode.value = _code
+      const { run } = useRunCode()
+      run(code.value, language.value)
     }
 
     const language = ref<string>(props.language || '')

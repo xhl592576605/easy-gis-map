@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, watch, Transition } from 'vue'
 import { CompilerError } from '@vue/compiler-sfc'
 import './style/index.scss'
 export default defineComponent({
@@ -25,7 +25,7 @@ export default defineComponent({
         return err
       } else {
         let msg = err?.message || ''
-        const loc = (err as CompilerError).loc
+        const loc = (err as CompilerError)?.loc
         if (loc && loc.start) {
           msg = `(${loc.start.line}:${loc.start.column}) ` + msg
         }
@@ -33,11 +33,11 @@ export default defineComponent({
       }
     }
     return () => (
-      <transition name="fade">
+      <Transition name="fade">
         <pre>
           {formatMessage(props.err || props.warn)}
         </pre>
-      </transition >
+      </Transition >
     )
   }
 })

@@ -1,11 +1,11 @@
 export interface State {
   code: string,
-  complieCode: string,
+  complieCode: Array<string>,
   language: string
 }
 
 export const state: State = {
   code: '',
-  complieCode: '',
+  complieCode: [],
   language: ''
 }

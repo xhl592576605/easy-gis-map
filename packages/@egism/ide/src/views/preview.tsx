@@ -1,18 +1,22 @@
-import { defineComponent, onMounted, onUnmounted, ref, watchEffect, WatchStopHandle } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref, watchEffect, WatchStopHandle, watch } from 'vue'
+import { useStore } from 'vuex'
 import message from '../components/message'
 import { PreviewProxy, srcdoc } from '../preview'
+import { State } from '../store/state'
 import './style/preview.scss'
 export default defineComponent({
   name: 'preview',
   components: { message },
   setup: () => {
+    const store = useStore<State>()
     const container = ref()
-    const runtimeError = ref()
+    const runtimeError = ref<string | Error>()
     const runtimeWarning = ref()
 
     let sandbox: HTMLIFrameElement
     let proxy: PreviewProxy
     let stopUpdateWatcher: WatchStopHandle
+    let stopUpdateLanguageWatcher: WatchStopHandle
 
     // 创建容器
     const createSandbox = () => {
@@ -110,36 +114,47 @@ export default defineComponent({
       })
 
       sandbox.addEventListener('load', () => {
-        proxy.handle_links()
+        // proxy.handle_links()
       })
     }
 
-    const updatePreview = async () => {
+    stopUpdateWatcher = watch(() => store.state.complieCode, async (newVal) => {
       // @ts-ignore
       if (import.meta.env.PROD) {
         console.clear()
       }
-      runtimeError.value = null
-      runtimeWarning.value = null
+      runtimeError.value = undefined
+      runtimeWarning.value = undefined
       try {
-
-        await proxy.eval([
-        ])
+        if (newVal.length === 0) {
+          return
+        }
+        await proxy.eval(JSON.parse(JSON.stringify(newVal)) as Array<string>)
       } catch (e: any) {
         runtimeError.value = (e as Error).message
       }
-    }
+    })
+
+    stopUpdateLanguageWatcher = watch(() => store.state.language, (newVal) => {
+      if (!newVal || newVal === '' || !srcdoc[newVal] || srcdoc[newVal] === '') {
+        return
+      }
+      sandbox.srcdoc = srcdoc[newVal]
+    }, {
+      immediate: true
+    })
 
     onMounted(createSandbox)
     onUnmounted(() => {
       proxy.destroy()
-      stopUpdateWatcher = watchEffect(updatePreview)
+      stopUpdateWatcher && stopUpdateWatcher()
+      stopUpdateLanguageWatcher && stopUpdateLanguageWatcher()
     })
     return () => (
       <div class='preview'>
         <div class="preview-iframe-container" ref={container}></div>
-        <message err={runtimeError} />
-        {!runtimeError ? <message warn={runtimeWarning} /> : ''}
+        <message err={runtimeError.value} />
+        {runtimeWarning.value ? <message warn={runtimeWarning.value} /> : ''}
       </div>
     )
   }

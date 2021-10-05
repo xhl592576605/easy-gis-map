@@ -3,6 +3,7 @@ import './style/integrate.scss'
 import fileTree from './fileTree'
 import editor from './editor'
 import preview from './preview'
+import useRunCode from '../hooks/useRunCode'
 export default defineComponent({
   name: 'integrate',
   components: { fileTree, editor, preview },
@@ -10,11 +11,13 @@ export default defineComponent({
 
     let fileInfo = reactive({
       name: 'code.js',
-      code: '// code \n',
+      code: '// code \n// js 暂不支持，请选择文件夹中的文件 \n',
       language: 'javascript'
     })
     const onSlectFile = (_fileInfo: any) => {
       fileInfo = Object.assign(fileInfo, _fileInfo)
+      const { run } = useRunCode()
+      run(fileInfo.code, fileInfo.language)
     }
 
     return () => (
