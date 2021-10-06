@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "version": "0.0.0",
   "workspaces": {
     "nohoist": [
       "**/@vue/**",
@@ -15,7 +16,8 @@
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean",
     "version": "lerna version --conventional-commits",
-    "core:build": "lerna run --stream --scope @egism/core build"
+    "core:build": "lerna run --stream --scope @egism/core build",
+    "ide:dev": "lerna run --stream --scope @egism/ide dev"
   },
   "config": {
     "commitizen": {

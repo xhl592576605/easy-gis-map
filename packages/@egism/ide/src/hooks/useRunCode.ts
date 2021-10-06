@@ -1,17 +1,23 @@
 import { store } from "../store"
 import { MutationTypes } from "../store/constants"
+import useSfcCompiler from "./useSfcCompiler"
 
 export default () => {
   const codeCompile: any = {
-    markdown: (code: string) => {
+    markdown: async (code: string) => {
       return ['document.getElementById("content").innerHTML =marked(' + '`' + code + '`);']
+    },
+    vue: async (code: string, name: string) => {
+      const { compileFile } = useSfcCompiler()
+      debugger
+      const complied = await compileFile(code, name)
     }
   }
-  const run = (code: string, language: string) => {
+  const run = async (code: string, language: string, name: string) => {
     let compileStr = ''
     if (codeCompile[language]) {
       console.info(`${language} 编译中...`)
-      compileStr = codeCompile[language](code)
+      compileStr = await codeCompile[language](code, name)
       console.info(`${language} 编译成功...`)
     }
     new Promise((resolve) => {

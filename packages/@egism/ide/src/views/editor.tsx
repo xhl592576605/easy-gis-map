@@ -29,12 +29,12 @@ export default defineComponent({
     })
     const runCode = () => {
       const { run } = useRunCode()
-      run(code.value, language.value)
+      run(code.value, language.value, props.name as string)
     }
     const restore = () => {
       code.value = oldCode.value
       const { run } = useRunCode()
-      run(code.value, language.value)
+      run(code.value, language.value, props.name as string)
     }
 
     const language = ref<string>(props.language || '')

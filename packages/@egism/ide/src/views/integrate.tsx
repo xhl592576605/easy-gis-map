@@ -17,7 +17,7 @@ export default defineComponent({
     const onSlectFile = (_fileInfo: any) => {
       fileInfo = Object.assign(fileInfo, _fileInfo)
       const { run } = useRunCode()
-      run(fileInfo.code, fileInfo.language)
+      run(fileInfo.code, fileInfo.language, fileInfo.name)
     }
 
     return () => (
