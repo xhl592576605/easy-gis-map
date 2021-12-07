@@ -1,14 +1,13 @@
 import { defineComponent, onMounted, onUnmounted, ref, watchEffect, WatchStopHandle, watch } from 'vue'
-import { useStore } from 'vuex'
 import message from '../components/message'
 import { PreviewProxy, srcdoc } from '../preview'
-import { State } from '../store/state'
+import { useStore } from '../store'
 import './style/preview.scss'
 export default defineComponent({
   name: 'preview',
   components: { message },
   setup: () => {
-    const store = useStore<State>()
+    const store = useStore()
     const container = ref()
     const runtimeError = ref<string | Error>()
     const runtimeWarning = ref()
@@ -125,6 +124,9 @@ export default defineComponent({
       }
       runtimeError.value = undefined
       runtimeWarning.value = undefined
+      if (!newVal) {
+        return
+      }
       try {
         if (newVal.length === 0) {
           return

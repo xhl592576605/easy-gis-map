@@ -3,13 +3,12 @@ import { MutationTypes } from "../store/constants"
 import useSfcCompiler from "./useSfcCompiler"
 
 export default () => {
+  const { compileFile } = useSfcCompiler()
   const codeCompile: any = {
     markdown: async (code: string) => {
       return ['document.getElementById("content").innerHTML =marked(' + '`' + code + '`);']
     },
     vue: async (code: string, name: string) => {
-      const { compileFile } = useSfcCompiler()
-      debugger
       const complied = await compileFile(code, name)
     }
   }

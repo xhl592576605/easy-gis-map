@@ -1,6 +1,6 @@
 import * as defaultCompiler from '@vue/compiler-sfc'
 import { BindingMetadata, SFCDescriptor } from "@vue/compiler-sfc"
-import { useStore } from 'vuex'
+import { useStore } from '../store'
 import { MutationTypes } from '../store/constants'
 
 export default () => {
