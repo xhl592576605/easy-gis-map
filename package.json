@@ -1,0 +1,37 @@
+{
+  "name": "test-temp",
+  "private": true,
+  "scripts": {
+    "commit": "git-cz",
+    "clean": "rm -rf node_modules **/*/node_modules",
+    "core:build": "pnpm  build --filter @egism/core"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "packages/*/src/*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "commitizen": "^4.2.4",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "@types/node": "^16.4.7"
+
+  },
+  "version": "1.0.0",
+  "description": "easy-gis-map"
+}
