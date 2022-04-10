@@ -108,7 +108,7 @@ function createConfig (format, output, plugins = []) {
   hasTSChecked = true
 
   const external = [
-    'lodash'
+    // 'lodash'
   ]
 
   const nodePlugins = [
